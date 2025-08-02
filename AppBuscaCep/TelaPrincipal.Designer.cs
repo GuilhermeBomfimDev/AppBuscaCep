@@ -33,11 +33,12 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.CampoPesquisa = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.ErroCepInvalido = new System.Windows.Forms.Label();
             this.ErroCepNaoEncontrado = new System.Windows.Forms.Label();
             this.ErroEndNaoEncontrado = new System.Windows.Forms.Label();
+            this.CampoBuscaCep = new System.Windows.Forms.MaskedTextBox();
+            this.ErroCepNull = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -58,7 +59,7 @@
             this.button1.Margin = new System.Windows.Forms.Padding(1);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(300, 47);
-            this.button1.TabIndex = 0;
+            this.button1.TabIndex = 1;
             this.button1.Text = "Pesquisar";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -100,23 +101,15 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "BuscaCep";
             // 
-            // CampoPesquisa
-            // 
-            this.CampoPesquisa.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CampoPesquisa.Location = new System.Drawing.Point(200, 285);
-            this.CampoPesquisa.Name = "CampoPesquisa";
-            this.CampoPesquisa.Size = new System.Drawing.Size(300, 33);
-            this.CampoPesquisa.TabIndex = 6;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
             this.label2.Location = new System.Drawing.Point(196, 263);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(211, 19);
+            this.label2.Size = new System.Drawing.Size(121, 19);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Digite o N.º CEP ou Endereço";
+            this.label2.Text = "Digite o N.º CEP";
             // 
             // ErroCepInvalido
             // 
@@ -154,23 +147,50 @@
             this.ErroEndNaoEncontrado.Text = "Endereço não encontrado";
             this.ErroEndNaoEncontrado.Visible = false;
             // 
+            // CampoBuscaCep
+            // 
+            this.CampoBuscaCep.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePrompt;
+            this.CampoBuscaCep.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
+            this.CampoBuscaCep.HideSelection = false;
+            this.CampoBuscaCep.Location = new System.Drawing.Point(200, 285);
+            this.CampoBuscaCep.Mask = "00000-000";
+            this.CampoBuscaCep.Name = "CampoBuscaCep";
+            this.CampoBuscaCep.Size = new System.Drawing.Size(300, 25);
+            this.CampoBuscaCep.TabIndex = 0;
+            this.CampoBuscaCep.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
+            this.CampoBuscaCep.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CampoBuscaCep_KeyDown);
+            // 
+            // ErroCepNull
+            // 
+            this.ErroCepNull.AutoSize = true;
+            this.ErroCepNull.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
+            this.ErroCepNull.ForeColor = System.Drawing.Color.Red;
+            this.ErroCepNull.Location = new System.Drawing.Point(289, 340);
+            this.ErroCepNull.Name = "ErroCepNull";
+            this.ErroCepNull.Size = new System.Drawing.Size(118, 19);
+            this.ErroCepNull.TabIndex = 11;
+            this.ErroCepNull.Text = "CEP obrigatório";
+            this.ErroCepNull.Visible = false;
+            // 
             // TelaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(684, 661);
+            this.Controls.Add(this.ErroCepNull);
+            this.Controls.Add(this.CampoBuscaCep);
             this.Controls.Add(this.ErroEndNaoEncontrado);
             this.Controls.Add(this.ErroCepNaoEncontrado);
             this.Controls.Add(this.ErroCepInvalido);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.CampoPesquisa);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TelaPrincipal";
@@ -189,11 +209,12 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox CampoPesquisa;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label ErroCepInvalido;
         private System.Windows.Forms.Label ErroCepNaoEncontrado;
         private System.Windows.Forms.Label ErroEndNaoEncontrado;
+        private System.Windows.Forms.MaskedTextBox CampoBuscaCep;
+        private System.Windows.Forms.Label ErroCepNull;
     }
 }
 

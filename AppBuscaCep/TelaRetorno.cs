@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using Newtonsoft.Json;
+using System;
+using System.Net.Http;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AppBuscaCep
@@ -15,19 +10,34 @@ namespace AppBuscaCep
     {
         Thread t1;
 
-        public TelaRetorno()
+        public TelaRetorno(HttpResponseMessage retornoApi)
         {
             InitializeComponent();
+
+            ApresentarDados(retornoApi);
         }
 
-        private void TelaRetorno_Load(object sender, EventArgs e)
+        public async void ApresentarDados(HttpResponseMessage retornoApi)
         {
-            
+            try
+            {
+                string conteudoApi = await retornoApi.Content.ReadAsStringAsync(); // Li o conteúdo do retorno da API
+
+                dynamic obj = JsonConvert.DeserializeObject(conteudoApi); // Separar os itens de acordo com o retorno em JSON
+
+                PreencherTabela(obj);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao carregar os dados da API: " + ex.Message);
+            }
         }
 
-        private void TelaRetorno_FormClosed(object sender, FormClosedEventArgs e)
+        public  void PreencherTabela(dynamic obj)
         {
-            
+            TabelaDados.Controls.Clear();
+
+
         }
 
         private void BotaoNovaConsulta_Click(object sender, EventArgs e)
