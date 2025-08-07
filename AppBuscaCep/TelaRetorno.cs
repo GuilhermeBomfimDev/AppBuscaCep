@@ -21,9 +21,9 @@ namespace AppBuscaCep
         {
             try
             {
-                string conteudoApi = await retornoApi.Content.ReadAsStringAsync(); // Li o conteúdo do retorno da API
+                string conteudoApi = await retornoApi.Content.ReadAsStringAsync();
 
-                dynamic obj = JsonConvert.DeserializeObject(conteudoApi); // Separar os itens de acordo com o retorno em JSON
+                dynamic obj = JsonConvert.DeserializeObject(conteudoApi);
 
                 PreencherTabela(obj);
             }
@@ -35,9 +35,15 @@ namespace AppBuscaCep
 
         public  void PreencherTabela(dynamic obj)
         {
-            TabelaDados.Controls.Clear();
-
-
+            CampoCepRetorno.Text = obj.cep;
+            CampoLog.Text = obj.logradouro;
+            CampoComplemento.Text = obj.complemento;
+            CampoBairro.Text = obj.bairro;
+            CampoCidade.Text = obj.localidade;
+            CampoUf.Text = obj.uf;
+            CampoEstado.Text = obj.estado;
+            CampoRegiao.Text = obj.regiao;
+            CampoDDD.Text = obj.ddd;
         }
 
         private void BotaoNovaConsulta_Click(object sender, EventArgs e)
@@ -55,5 +61,6 @@ namespace AppBuscaCep
         {
             Application.Run(new TelaPrincipal());
         }
+
     }
 }
