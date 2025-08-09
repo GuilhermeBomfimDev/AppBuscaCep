@@ -51,6 +51,7 @@ Frase: '{texto}'";
 HttpResponseMessage response = await client.GetAsync(url);
 var json = await response.Content.ReadAsStringAsync();
 List<CepDados> enderecos = JsonConvert.DeserializeObject<List<CepDados>>(json);
+```
 
 📌 Observações
 --------------
